@@ -1,0 +1,5 @@
+apb-user-bundle.routes:
+    resource:
+        path: ../src/Controller/
+        namespace: Apb\UserBundle\Controller
+    type: attribute

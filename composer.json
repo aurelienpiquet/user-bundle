@@ -1,0 +1,28 @@
+{
+    "name": "apb/user-bundle",
+    "version": "1.0",
+    "description": "Bundle to create user",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Apb\\UserBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Apb\\UserBundle\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "aurelien piquet"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "friendsofsymfony/rest-bundle": ">=3.3",
+        "doctrine/annotations": "^1.0",
+        "doctrine/orm": "^2.11"
+    }
+}

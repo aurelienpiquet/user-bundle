@@ -1,0 +1,42 @@
+{
+  "manifests": {
+    "apb/hello-world-bundle": {
+      "manifest": {
+        "bundles": {
+          "Apb\\UserBundle\\ApbUserBundle": [
+            "all"
+          ]
+        },
+        "copy-from-recipe": {
+          "config/": "%CONFIG_DIR%"
+        },
+        "env": {
+          "MAILER_SENDER": "Alfredo@feelity.test.fr"
+        },
+        "gitignore": [
+          "/%CONFIG_DIR%/jwt/*.pem"
+        ]
+      },
+      "files": {
+        "config/routes/apb-hello-world.yaml": {
+          "contents": [
+            "apb-user-bundle.routes:",
+            "   resource: '@ApbUserBundle/config/routes.yaml'",
+            "api_login_check:",
+            "   path: /login_check"
+          ],
+          "executable": false
+        },
+        "script/install.sh": {
+          "content": [
+            "#!/bin/bash",
+            "php bin/console lexik:jwt:generate-keypair --overwrite",
+            "php bin/console d:s:u --force -y"
+          ],
+          "executable": true
+        }
+      },
+      "ref": "c82bca82650b2d76b43021b9b8479eb0b343c56d"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "recipes": {
+    "apb/user-bundle": [
+      "1.0"
+    ]
+  },
+  "branch": "main",
+  "is_contrib": true,
+  "_links": {
+    "repository": "github.com/aurelienpiquet/user-bundle",
+    "origin_template": "{package}:{version}@github.com/aurelienpiquet/user-bundle:main",
+    "recipe_template": "https://api.github.com/repos/aurelienpiquet/user-bundle/contents/apb-user-bundle.{version}.json"
+  }
+}
