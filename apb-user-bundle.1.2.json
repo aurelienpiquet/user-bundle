@@ -30,8 +30,8 @@
           "file": "config/packages/security.yaml",
           "position": "after_target",
           "warn_if_missing": true,
-          "target": "   firewalls:",
-          "content": "      login:\n            pattern: ^/login\n            stateless: true\n            json_login:\n                check_path: /login_check\n                success_handler: lexik_jwt_authentication.handler.authentication_success\n                failure_handler: lexik_jwt_authentication.handler.authentication_failure\n\n        api:\n            pattern:   ^/api\n            stateless: true\n            jwt: ~"
+          "target": "    firewalls:",
+          "content": "        login:\n            pattern: ^/login\n            stateless: true\n            json_login:\n                check_path: /login_check\n                success_handler: lexik_jwt_authentication.handler.authentication_success\n                failure_handler: lexik_jwt_authentication.handler.authentication_failure\n\n        api:\n            pattern:   ^/api\n            stateless: true\n            jwt: ~"
         }
       ],
       "files": {
