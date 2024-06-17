@@ -18,20 +18,21 @@
         ]
       },
       "files": {
-        "config/routes/apb-user-bundle.yaml": {
-          "contents": [
-            "apb-user-bundle.routes:",
-            "   resource: '@ApbUserBundle/config/routes.yaml'",
-            "api_login_check:",
-            "   path: /login_check"
-          ],
-          "executable": false
-        },
-        "script/install.sh": {
+        "./script/install.sh": {
           "contents": [
             "#!/bin/bash",
             "php bin/console lexik:jwt:generate-keypair --overwrite",
             "php bin/console d:s:u --force -y"
+          ],
+          "executable": false
+        },
+        "config/routes/apb-user-bundle.yaml": {
+          "contents": [
+            "apb-user-bundle.routes:",
+            "   resource: '@ApbUserBundle/config/routes.yaml'",
+            "\n",
+            "api_login_check:",
+            "   path: /login_check"
           ],
           "executable": false
         }
