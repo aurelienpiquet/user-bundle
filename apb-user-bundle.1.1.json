@@ -28,7 +28,7 @@
           "executable": false
         },
         "script/install.sh": {
-          "content": [
+          "contents": [
             "#!/bin/bash",
             "php bin/console lexik:jwt:generate-keypair --overwrite",
             "php bin/console d:s:u --force -y"
