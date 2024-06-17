@@ -33,7 +33,7 @@
             "php bin/console lexik:jwt:generate-keypair --overwrite",
             "php bin/console d:s:u --force -y"
           ],
-          "executable": true
+          "executable": false
         }
       },
       "ref": "c82bca82650b2d76b43021b9b8479eb0b343c56d"
