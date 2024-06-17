@@ -15,14 +15,31 @@
         },
         "gitignore": [
           "/%CONFIG_DIR%/jwt/*.pem"
+        ],
+        "post-install-output": [
+          "  1. <bg=magenta;fg=white> Create jwt keys </>",
+          "    * php bin/console lexik:jwt:generate-keypair --overwrite",
+          "",
+          "  2. <bg=magenta;fg=white> Update the database schema </>",
+          "    * php bin/console d:s:u --force",
+          ""
         ]
       },
+      "add-lines":[
+        {
+          "file": "config/packages/security.yaml",
+          "position": "after_target",
+          "warn_if_missing": true,
+          "target": "   firewalls:",
+          "content": "      login:\n            pattern: ^/login\n            stateless: true\n            json_login:\n                check_path: /login_check\n                success_handler: lexik_jwt_authentication.handler.authentication_success\n                failure_handler: lexik_jwt_authentication.handler.authentication_failure\n\n        api:\n            pattern:   ^/api\n            stateless: true\n            jwt: ~"
+        }
+      ],
       "files": {
-        "./script/install.sh": {
+        "script/install.yaml": {
           "contents": [
             "#!/bin/bash",
             "php bin/console lexik:jwt:generate-keypair --overwrite",
-            "php bin/console d:s:u --force -y"
+            "php bin/console d:s:u --force"
           ],
           "executable": false
         },
