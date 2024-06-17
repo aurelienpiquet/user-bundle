@@ -1,6 +1,6 @@
 {
   "manifests": {
-    "apb/hello-world-bundle": {
+    "apb/user-bundle": {
       "manifest": {
         "bundles": {
           "Apb\\UserBundle\\ApbUserBundle": [
@@ -18,7 +18,7 @@
         ]
       },
       "files": {
-        "config/routes/apb-hello-world.yaml": {
+        "config/routes/apb-user-bundle.yaml": {
           "contents": [
             "apb-user-bundle.routes:",
             "   resource: '@ApbUserBundle/config/routes.yaml'",
