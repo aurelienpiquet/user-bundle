@@ -11,7 +11,7 @@
           "config/": "%CONFIG_DIR%"
         },
         "env": {
-          "MAILER_SENDER": "Alfredo@feelity.test.fr"
+          "MAILER_SENDER": "userbundle@feelity.fr"
         },
         "gitignore": [
           "/%CONFIG_DIR%/jwt/*.pem"
@@ -22,6 +22,16 @@
           "",
           "  2. <bg=magenta;fg=white> Update the database schema </>",
           "    * php bin/console d:s:u --force",
+          "",
+          "  3. <bg=magenta;fg=white> Configure user_bundle.yaml </>",
+          "    * Create a file public/style/mailer.css if you want, otherwise a default font will be used",
+          "    * Logo of your application is to be set in /public/img/logo.png",
+          "",
+          "  4. <bg=magenta;fg=white> Create league oauth credentials </>",
+          "    * php bin/console league:oauth2-server:create-client project_name key secret --redirect-uri=uri --grant-type=password --grant-type=refresh_token --scope=USER",
+          "",
+          "  1. <bg=magenta;fg=white> Install node for mjml mailer</>",
+          "    * npm install",
           ""
         ],
         "add-lines":[
@@ -30,7 +40,7 @@
             "position": "after_target",
             "warn_if_missing": true,
             "target": "    firewalls:",
-            "content": "        login:\n            pattern: ^/login\n            stateless: true\n            json_login:\n                check_path: /login_check\n                success_handler: lexik_jwt_authentication.handler.authentication_success\n                failure_handler: lexik_jwt_authentication.handler.authentication_failure\n\n        api:\n            pattern:   ^/api\n            stateless: true\n            jwt: ~"
+            "content": "        api_token:\n            pattern: ^/token\n            security: false\n\n        api:\n            pattern: ^/api\n            security: true\n            stateless: true\n            oauth2: true\n            provider: app_user_provider"
           }
         ]
       },
@@ -43,13 +53,17 @@
           ],
           "executable": false
         },
-        "config/routes/apb-user-bundle.yaml": {
+        "config/routes/user_bundle.yaml": {
           "contents": [
-            "apb-user-bundle.routes:",
+            "user_bundle.routes:",
             "   resource: '@ApbUserBundle/config/routes.yaml'",
-            "\n",
-            "api_login_check:",
-            "   path: /login_check"
+            "\n"
+          ],
+          "executable": false
+        },
+        "config/packages/user_bundle.yaml": {
+          "contents": [
+            "user_bundle:\n#  mailer:\n#    apiUrl:\n#    projectName:\n#    sender:\n#    senderStr:\n#    style: '%kernel.project_dir%/public/style/mailer.css'\n#    logo:"
           ],
           "executable": false
         }

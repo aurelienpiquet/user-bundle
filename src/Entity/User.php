@@ -23,27 +23,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::GUID)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: UuidGenerator::class)]
-    #[Groups(['user', 'user_list'])]
-    private ?string $id = null;
+    #[Groups(['apb_user', 'apb_user_list'])]
+    protected ?string $id = null;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
-    #[Groups(['user', 'user_list'])]
-    private ?string $email = null;
+    #[Groups(['apb_user', 'apb_user_list'])]
+    protected ?string $email = null;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
-    #[Groups(['user', 'user_list'])]
-    private ?string $lastName = null;
+    #[Groups(['apb_user', 'apb_user_list'])]
+    protected ?string $lastName = null;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
-    #[Groups(['user', 'user_list'])]
-    private ?string $firstName = null;
+    #[Groups(['apb_user', 'apb_user_list'])]
+    protected ?string $firstName = null;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
-    private ?string $password = null;
+    protected ?string $password = null;
 
     #[ORM\Column(type: Types::ARRAY)]
-    #[Groups(['user', 'user_list'])]
-    private array $roles = [];
+    #[Groups(['apb_user', 'apb_user_list'])]
+    protected array $roles = [];
 
     public function __toString()
     {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Apb\UserBundle\Repository;
 
-use Apb\UserBundle\Entity\User;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -60,7 +60,7 @@ class UserRepository extends ServiceEntityRepository
     /**
      * @throws NonUniqueResultException
      */
-    public function fetchByEmail(string $email)
+    public function fetchByEmail(string $email): ?User
     {
         $qb = $this->createQueryBuilder('u')
             ->andWhere('u.email = :email')

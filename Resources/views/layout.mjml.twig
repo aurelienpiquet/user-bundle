@@ -1,0 +1,98 @@
+<mjml>
+    <mj-head>
+        <mj-title>{{ projectName }}</mj-title>
+        <mj-preview>{% block subject %}{% endblock %}</mj-preview>
+        <mj-attributes>
+            <mj-all font-family="'Open Sans', Helvetica, Arial, sans-serif"></mj-all>
+            <mj-text font-weight="400" font-size="16px" color="#000000" line-height="24px"
+                     font-family="'Open Sans', Helvetica, Arial, sans-serif"></mj-text>
+        </mj-attributes>
+        {% if style is not defined %}
+            <mj-style inline="inline">
+                .body-section {
+                -webkit-box-shadow: 1px 4px 11px 0 rgba(0, 0, 0, 0.15);
+                -moz-box-shadow: 1px 4px 11px 0 rgba(0, 0, 0, 0.15);
+                box-shadow: 1px 4px 11px 0 rgba(0, 0, 0, 0.15);
+                }
+
+                .text-link {
+                    color: #5e6ebf
+                }
+
+                .footer-link {
+                    color: #888888
+                }
+
+                .image {
+                    background-color: #ffffff;
+                    width: 70px;
+                    height: 70px;
+                    border-radius: 35px;
+                    margin-top: 15px;
+                }
+
+                .logo {
+                    height: 40px;
+                    margin: 30px 0 0;
+                }
+
+                .body-message > div {
+                    color: #212b35!important;
+                    font-size: 14px!important;
+                    text-align: left!important;
+                    padding-left: 60px!important;
+                    padding-right: 60px!important;
+                    padding-top: 10px!important;
+                }
+
+                .title-message > div {
+                    color: #212b35!important;
+                    font-size: 24px!important;
+                    font-weight: bold!important;
+                    text-align: center!important;
+                }
+
+                .link-message {
+                    background-color: #212b35;
+                    color: white;
+                    text-decoration: none!important;
+                    display: inline-block;
+                    padding: 10px 30px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    opacity:1;
+
+                    -webkit-transition: opacity 0.3s ease-in-out;
+                    -moz-transition: opacity 0.3s ease-in-out;
+                    transition: opacity 0.3s ease-in-out;
+                }
+            </mj-style>
+        {% else %}
+            <mj-style>{{ style | raw }}</mj-style>
+        {% endif %}
+    </mj-head>
+
+    <mj-body background-color="#F2F2F2" width="600px">
+        {% if logo is defined %}
+            <mj-section padding="0" padding-top="50px" padding-bottom="10px">
+                <mj-column width="100%" padding="0" align="center" margin="0">
+                    <mj-image width="200px" src="{{ apiUrl ~ asset('img/' ~ logo ) }}" alt="logo {{ projectName }}"></mj-image>
+                </mj-column>
+            </mj-section>
+        {% endif %}
+
+        <mj-section background-color="#ffffff" width="100%">
+            {% block body %}{% endblock %}
+        </mj-section>
+
+        <mj-wrapper full-width="full-width" margin="0" padding="0">
+            <mj-section>
+                <mj-column width="100%" padding="0">
+                    <mj-text color="#445566" font-size="11px" align="center" line-height="16px">
+                        &copy; {{ projectName }}, {{ "now"|date("Y") }}, Tous droits réservés.
+                    </mj-text>
+                </mj-column>
+            </mj-section>
+        </mj-wrapper>
+    </mj-body>
+</mjml>

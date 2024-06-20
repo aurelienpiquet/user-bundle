@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Apb\UserBundle\Manager;
 
-use Apb\UserBundle\Entity\User;
+use Apb\UserBundle\Service\MailService;
+use App\Entity\User;
 use Apb\UserBundle\Form\LoginType;
 use Apb\UserBundle\Form\RegisterCreateType;
 use Apb\UserBundle\Model\LoginModel;
 use Apb\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -22,10 +24,12 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 class UserManager extends AbstractManager
 {
     public function __construct(
-        protected TokenStorageInterface $tokenStorage,
+        private readonly TokenStorageInterface $tokenStorage,
         private readonly FormFactoryInterface        $formFactory,
         private readonly UserRepository              $userRepository,
-        private readonly UserPasswordHasherInterface $hasher
+        private readonly UserPasswordHasherInterface $hasher,
+        private readonly MailService $mailer,
+        private readonly ParameterBagInterface $bag,
     ) {
         parent::__construct(
             $this->tokenStorage,
@@ -47,6 +51,8 @@ class UserManager extends AbstractManager
      */
     public function get(): User
     {
+        $this->mailer->send($this->user->getEmail(), ['title' => 'test style', 'message' => 'un message'], 'mails/message.mjml.twig');
+
         return $this->fetch($this->user->getId());
     }
 
@@ -82,13 +88,31 @@ class UserManager extends AbstractManager
             return $form;
         }
 
-        $user
-            ->addRole('ROLE_USER')
-        ;
+        $user->addRole('ROLE_USER');
+
+        $password = $user->getPassword();
 
         $this->upgradePassword($user, $user->getPassword());
 
         $this->userRepository->save($user, true);
+
+        try {
+            $configuration = $this->bag->get('user_bundle.mailer');
+
+            $context = [
+                'title' => 'Bienvenu sur ' . $configuration['projectName'],
+                'button' => 'Welcome',
+                'url' => 'https://google.fr',
+                'message' => sprintf("Merci d'avoir créer votre compte sur %s, vous pouvez désormais vous connecter avec vos identifiants <br> identifiant : %s <br> password: %s",
+                    $configuration['projectName'],
+                    $user->getEmail(),
+                    $password,
+                )
+        ];
+
+            $this->mailer->send($user->getEmail(), $context);
+        } catch (\Exception) {}
+
 
         return $user;
     }
