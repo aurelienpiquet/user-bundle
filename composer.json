@@ -1,6 +1,6 @@
 {
     "name": "apb/user-bundle",
-    "version": "1.2",
+    "version": "1.3",
     "description": "Bundle to create user",
     "type": "symfony-bundle",
     "license": "MIT",
