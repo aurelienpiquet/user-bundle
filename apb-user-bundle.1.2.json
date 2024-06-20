@@ -63,12 +63,6 @@
           ],
           "executable": false
         },
-        "config/packages/fos_rest.yaml": {
-          "contents": [
-            "# Read the documentation: https://fosrestbundle.readthedocs.io/en/3.x/\nfos_rest:\n    param_fetcher_listener: true\n    allowed_methods_listener: true\n    body_listener: true\n    body_converter:\n        enabled: true\n    view:\n        view_response_listener: true\n    format_listener:\n        rules:\n            - { path: ^/api/v\\d+/doc, prefer_extension: true, fallback_format: json, priorities: [ 'html', '*/*' ] }\n            - { path: ^/$, prefer_extension: true, fallback_format: json, priorities: [ 'html','json' ] }\n            - { path: ^/*, prefer_extension: true, fallback_format: json, priorities: [ json ] }\n"
-          ],
-          "executable": false
-        },
         "config/packages/user_bundle.yaml": {
           "contents": [
             "user_bundle:\n#  mailer:\n#    apiUrl:\n#    projectName:\n#    sender:\n#    senderStr:\n#    style: '%kernel.project_dir%/public/style/mailer.css'\n#    logo:"
