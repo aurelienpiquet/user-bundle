@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Apb\UserBundle\Manager;
 
-use Apb\UserBundle\Service\MailService;
 use App\Entity\User;
 use Apb\UserBundle\Form\LoginType;
 use Apb\UserBundle\Form\RegisterCreateType;
@@ -28,7 +27,6 @@ class UserManager extends AbstractManager
         private readonly FormFactoryInterface        $formFactory,
         private readonly UserRepository              $userRepository,
         private readonly UserPasswordHasherInterface $hasher,
-        private readonly MailService $mailer,
         private readonly ParameterBagInterface $bag,
     ) {
         parent::__construct(
@@ -51,8 +49,6 @@ class UserManager extends AbstractManager
      */
     public function get(): User
     {
-        $this->mailer->send($this->user->getEmail(), ['title' => 'test style', 'message' => 'un message'], 'mails/message.mjml.twig');
-
         return $this->fetch($this->user->getId());
     }
 
@@ -97,7 +93,7 @@ class UserManager extends AbstractManager
         $this->userRepository->save($user, true);
 
         try {
-            $configuration = $this->bag->get('user_bundle.mailer');
+            $configuration = $this->bag->get('mailer_bundle.mailer');
 
             $context = [
                 'title' => 'Bienvenu sur ' . $configuration['projectName'],
