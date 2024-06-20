@@ -30,8 +30,10 @@
           "  4. <bg=magenta;fg=white> Create league oauth credentials </>",
           "    * php bin/console league:oauth2-server:create-client project_name key secret --redirect-uri=uri --grant-type=password --grant-type=refresh_token --scope=USER",
           "",
-          "  1. <bg=magenta;fg=white> Install node for mjml mailer</>",
+          "  5. <bg=magenta;fg=white> Install node for mjml mailer</>",
           "    * npm install",
+          "",
+          "  6. <bg=magenta;fg=white>TEST</>",
           ""
         ],
         "add-lines":[
@@ -58,6 +60,12 @@
             "user_bundle.routes:",
             "   resource: '@ApbUserBundle/config/routes.yaml'",
             "\n"
+          ],
+          "executable": false
+        },
+        "config/packages/fos_rest.yaml": {
+          "contents": [
+            "# Read the documentation: https://fosrestbundle.readthedocs.io/en/3.x/\nfos_rest:\n    param_fetcher_listener: true\n    allowed_methods_listener: true\n    body_listener: true\n    body_converter:\n        enabled: true\n    view:\n        view_response_listener: true\n    format_listener:\n        rules:\n            - { path: ^/api/v\\d+/doc, prefer_extension: true, fallback_format: json, priorities: [ 'html', '*/*' ] }\n            - { path: ^/$, prefer_extension: true, fallback_format: json, priorities: [ 'html','json' ] }\n            - { path: ^/*, prefer_extension: true, fallback_format: json, priorities: [ json ] }\n"
           ],
           "executable": false
         },
