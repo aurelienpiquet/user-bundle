@@ -21,15 +21,5 @@ class UserBundleExtension extends Extension
         );
 
         $loader->load('services.yaml');
-
-        $configuration = new Configuration();
-
-        $config = $this->processConfiguration($configuration, $configs);
-
-        foreach ($config as $key => $value) {
-            if ($value) {
-                $container->setParameter('user_bundle.' . $key, $value);
-            }
-        }
     }
 }

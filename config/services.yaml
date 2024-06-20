@@ -4,8 +4,6 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-    node.binary: '/usr/bin/node'
-    mjml.binary: '%kernel.project_dir%/node_modules/mjml/bin/mjml'
 
 services:
     # default configuration for services in *this* file
@@ -19,11 +17,6 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
-
-    Apb\UserBundle\Service\MJMLService:
-        arguments:
-            $mjmlBinary: '%mjml.binary%'
-            $nodeBinary: '%node.binary%'
 
     Apb\UserBundle\EventListener\UserResolveListener:
         arguments:

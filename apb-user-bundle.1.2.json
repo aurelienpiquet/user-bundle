@@ -10,9 +10,6 @@
         "copy-from-recipe": {
           "config/": "%CONFIG_DIR%"
         },
-        "env": {
-          "MAILER_SENDER": "userbundle@feelity.fr"
-        },
         "gitignore": [
           "/%CONFIG_DIR%/jwt/*.pem"
         ],
@@ -23,15 +20,8 @@
           "  2. <bg=magenta;fg=white> Update the database schema </>",
           "    * php bin/console d:s:u --force",
           "",
-          "  3. <bg=magenta;fg=white> Configure user_bundle.yaml </>",
-          "    * Create a file public/style/mailer.css if you want, otherwise a default font will be used",
-          "    * Logo of your application is to be set in /public/img/logo.png",
-          "",
-          "  4. <bg=magenta;fg=white> Create league oauth credentials </>",
+          "  3. <bg=magenta;fg=white> Create league oauth credentials </>",
           "    * php bin/console league:oauth2-server:create-client project_name key secret --redirect-uri=uri --grant-type=password --grant-type=refresh_token --scope=USER",
-          "",
-          "  5. <bg=magenta;fg=white> Install node for mjml mailer</>",
-          "    * npm install",
           ""
         ],
         "add-lines":[
@@ -45,14 +35,6 @@
         ]
       },
       "files": {
-        "script/install.yaml": {
-          "contents": [
-            "#!/bin/bash",
-            "php bin/console lexik:jwt:generate-keypair --overwrite",
-            "php bin/console d:s:u --force"
-          ],
-          "executable": false
-        },
         "config/routes/user_bundle.yaml": {
           "contents": [
             "user_bundle.routes:",
