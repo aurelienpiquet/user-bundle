@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Apb\UserBundle\Manager;
 
+use Apb\UserBundle\Service\MailerService;
 use App\Entity\User;
 use Apb\UserBundle\Form\LoginType;
 use Apb\UserBundle\Form\RegisterCreateType;
@@ -28,6 +29,7 @@ class UserManager extends AbstractManager
         private readonly UserRepository              $userRepository,
         private readonly UserPasswordHasherInterface $hasher,
         private readonly ParameterBagInterface $bag,
+        private readonly MailerService $mailer,
     ) {
         parent::__construct(
             $this->tokenStorage,
@@ -92,23 +94,20 @@ class UserManager extends AbstractManager
 
         $this->userRepository->save($user, true);
 
-        try {
-            $configuration = $this->bag->get('mailer_bundle.mailer');
+        $configuration = $this->bag->get('mailer_bundle.mailer');
 
-            $context = [
-                'title' => 'Bienvenu sur ' . $configuration['projectName'],
-                'button' => 'Welcome',
-                'url' => 'https://google.fr',
-                'message' => sprintf("Merci d'avoir créer votre compte sur %s, vous pouvez désormais vous connecter avec vos identifiants <br> identifiant : %s <br> password: %s",
-                    $configuration['projectName'],
-                    $user->getEmail(),
-                    $password,
-                )
+        $context = [
+            'title' => 'Bienvenu sur ' . $configuration['projectName'],
+            'button' => 'Welcome',
+            'url' => 'https://google.fr',
+            'message' => sprintf("Merci d'avoir créer votre compte sur %s, vous pouvez désormais vous connecter avec vos identifiants <br> identifiant : %s <br> password: %s",
+                $configuration['projectName'],
+                $user->getEmail(),
+                $password,
+            )
         ];
 
-            $this->mailer->send($user->getEmail(), $context);
-        } catch (\Exception) {}
-
+        $this->mailer->send($user->getEmail(), $context);
 
         return $user;
     }

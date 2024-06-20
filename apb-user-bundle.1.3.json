@@ -45,7 +45,7 @@
         },
         "config/packages/user_bundle.yaml": {
           "contents": [
-            "user_bundle:\n#  mailer:\n#    apiUrl:\n#    projectName:\n#    sender:\n#    senderStr:\n#    style: '%kernel.project_dir%/public/style/mailer.css'\n#    logo:"
+            "user_bundle:\n#  mailer:\n#    mailer: false"
           ],
           "executable": false
         }

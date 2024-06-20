@@ -2,6 +2,7 @@
 
 namespace Apb\UserBundle\DependencyInjection;
 
+use Apb\MailerBundle\DependencyInjection\Configuration;
 use Exception;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -21,5 +22,15 @@ class UserBundleExtension extends Extension
         );
 
         $loader->load('services.yaml');
+
+        $configuration = new Configuration();
+
+        $config = $this->processConfiguration($configuration, $configs);
+
+        foreach ($config as $key => $value) {
+            if ($value) {
+                $container->setParameter('user_bundle.' . $key, $value);
+            }
+        }
     }
 }
