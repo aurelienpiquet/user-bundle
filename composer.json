@@ -25,7 +25,8 @@
         "doctrine/orm": ">=2.2",
         "nelmio/api-doc-bundle": ">=4.11",
         "league/oauth2-server-bundle": "*",
-        "apb/mailer-bundle": "*"
+        "apb/mailer-bundle": "*",
+        "lexik/jwt-authentication-bundle": "^3.0"
     },
     "extra": {
         "symfony": {
