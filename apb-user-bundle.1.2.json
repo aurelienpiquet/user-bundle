@@ -32,8 +32,6 @@
           "",
           "  5. <bg=magenta;fg=white> Install node for mjml mailer</>",
           "    * npm install",
-          "",
-          "  6. <bg=magenta;fg=white>TEST</>",
           ""
         ],
         "add-lines":[
