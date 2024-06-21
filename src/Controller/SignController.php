@@ -28,7 +28,7 @@ class SignController extends AbstractFOSRestController
      *
      * @throws NonUniqueResultException
      */
-    #[Post(path: '/login', name: 'user_bundle_login_jwt')]
+    #[Post(path: '/login', name: 'apb_user_bundle_login_jwt')]
     #[Rest\View(statusCode: 200, serializerGroups: [])]
     public function login(Request $request): View
     {

@@ -2,7 +2,6 @@
 
 namespace Apb\UserBundle\DependencyInjection;
 
-use Apb\MailerBundle\DependencyInjection\Configuration;
 use Exception;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

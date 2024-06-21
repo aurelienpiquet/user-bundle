@@ -45,7 +45,7 @@
         },
         "config/packages/user_bundle.yaml": {
           "contents": [
-            "user_bundle:\n#  mailer:\n#    mailer: false"
+            "user_bundle:\n#  configuration:\n#    mailer: true\n#    routes: ['register', 'oauth', 'profile', 'jwt', 'reset_password']"
           ],
           "executable": false
         }

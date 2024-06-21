@@ -10,8 +10,10 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\View\View;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 #[Route(path: '/api/v1')]
 class RegisterController extends AbstractFOSRestController
@@ -30,7 +32,7 @@ class RegisterController extends AbstractFOSRestController
      *
      * @throws \Exception
      */
-    #[Post(path: '/public/register', name: 'user_bundle_register')]
+    #[Post(path: '/public/register', name: 'apb_user_bundle_register')]
     #[Rest\View(statusCode: 201, serializerGroups: ['user'])]
     public function register(Request $request): View
     {

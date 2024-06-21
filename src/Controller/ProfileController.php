@@ -33,7 +33,7 @@ class ProfileController extends AbstractFOSRestController
         description: 'User connected profile',
         content: []
     )]
-    #[Get(path: '', name: 'user_bundle_me_get')]
+    #[Get(path: '', name: 'apb_user_bundle_me_get')]
     #[Rest\View(statusCode: 200, serializerGroups: ['apb_user_details', 'apb_user'])]
     public function fetch(): View
     {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Apb\UserBundle\Entity;
 
-use Apb\UserBundle\Repository\UserRepository;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\MappedSuperclass;
 use Symfony\Bridge\Doctrine\IdGenerator\UuidGenerator;
@@ -44,6 +44,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::JSON)]
     #[Groups(['apb_user', 'apb_user_list'])]
     protected array $roles = [];
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?DateTime $resetPasswordAt = null;
+
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $resetPasswordToken = null;
 
     public function __toString()
     {
@@ -118,11 +124,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
-    public function eraseCredentials(): void
-    {
-        // TODO: Implement eraseCredentials() method.
-    }
-
     public function getUserIdentifier(): string
     {
         return $this->getId();
@@ -135,5 +136,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    public function getResetPasswordAt(): ?DateTime
+    {
+        return $this->resetPasswordAt;
+    }
+
+    public function setResetPasswordAt(?DateTime $resetPasswordAt): User
+    {
+        $this->resetPasswordAt = $resetPasswordAt;
+        return $this;
+    }
+
+    public function getResetPasswordToken(): ?string
+    {
+        return $this->resetPasswordToken;
+    }
+
+    public function setResetPasswordToken(?string $resetPasswordToken): User
+    {
+        $this->resetPasswordToken = $resetPasswordToken;
+        return $this;
+    }
+
+    public function eraseCredentials(): void
+    {
     }
 }

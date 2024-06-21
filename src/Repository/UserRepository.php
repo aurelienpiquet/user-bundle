@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Apb\UserBundle\Repository;
 
-use App\Entity\User;
+use Apb\UserBundle\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -65,6 +65,16 @@ class UserRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('u')
             ->andWhere('u.email = :email')
             ->setParameter('email', $email)
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function fetchByToken(string $token): ?User
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->andWhere('u.resetPasswordToken = :token')
+            ->setParameter('token', $token)
         ;
 
         return $qb->getQuery()->getOneOrNullResult();
